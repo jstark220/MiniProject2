@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Recommendations — Net Worth Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Net Worth Tracker</h1>
+        <p>Get a clear snapshot of your wealth across all asset classes.</p>
+        <nav class="top-nav">
+            <a href="index.html" class="nav-link">Portfolio</a>
+            <a href="history.html" class="nav-link">Saved Snapshots</a>
+            <a href="advice.html" class="nav-link active">Recommendations</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div id="advice-empty" class="card hidden">
+            <p style="text-align:center; color:var(--text-muted); padding:1.5rem 0;">
+                No snapshot found. Go to <a href="index.html" class="inline-link">Portfolio</a>, add your assets, and save a snapshot first.
+            </p>
+        </div>
+
+        <section class="card hidden" id="snapshot-summary-card">
+            <div class="section-header">
+                <div>
+                    <h2>Your Latest Snapshot</h2>
+                    <span class="snapshot-meta" id="snapshot-summary-meta"></span>
+                </div>
+            </div>
+            <div class="advice-allocation-row" id="allocation-pills"></div>
+        </section>
+
+        <section class="card hidden" id="frameworks-card">
+            <h2>How You Compare to Expert Frameworks</h2>
+            <p class="advice-subtitle">Your equities, bonds, cash, and real estate are measured against four widely-cited allocation models. Deviation bars show how far you are from each target.</p>
+            <div id="framework-list"></div>
+        </section>
+
+        <section class="card hidden" id="recs-card">
+            <h2>Tailored Recommendations</h2>
+            <p class="advice-subtitle" id="recs-subtitle"></p>
+            <ul class="rec-list" id="rec-list"></ul>
+            <p class="advice-disclaimer">
+                These recommendations are based on publicly available expert frameworks and your entered data. They are for educational purposes only and do not constitute financial advice. Consult a licensed financial advisor before making investment decisions.
+            </p>
+        </section>
+
+        <section class="card hidden" id="resources-card">
+            <h2>Further Reading</h2>
+            <p class="advice-subtitle">These frameworks are drawn from the following sources.</p>
+            <ul class="resource-list" id="resource-list"></ul>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="advice.js"></script>
+</body>
+</html>

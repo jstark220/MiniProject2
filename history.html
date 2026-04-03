@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Snapshots — Net Worth Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Net Worth Tracker</h1>
+        <p>Get a clear snapshot of your wealth across all asset classes.</p>
+        <nav class="top-nav">
+            <a href="index.html" class="nav-link">Portfolio</a>
+            <a href="history.html" class="nav-link active">Saved Snapshots</a>
+            <a href="advice.html" class="nav-link">Recommendations</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div id="history-empty" class="card">
+            <p style="text-align:center; color:var(--text-muted); padding: 1.5rem 0;">
+                No snapshots saved yet. Go to <a href="index.html" class="inline-link">Portfolio</a> and save one.
+            </p>
+        </div>
+
+        <section class="card hidden" id="compare-picker-card">
+            <h2>Compare Two Snapshots</h2>
+            <div class="compare-picker-row">
+                <div class="form-group">
+                    <label for="compare-a">Snapshot A</label>
+                    <select id="compare-a"></select>
+                </div>
+                <div class="compare-vs">vs</div>
+                <div class="form-group">
+                    <label for="compare-b">Snapshot B</label>
+                    <select id="compare-b"></select>
+                </div>
+                <button id="compare-go-btn" class="btn-primary" style="align-self:flex-end;">Compare</button>
+            </div>
+        </section>
+
+        <section class="card hidden" id="compare-result-card">
+            <div class="section-header">
+                <h2 id="compare-result-title">Comparison</h2>
+                <div class="chart-toggles" id="compare-result-toggles">
+                    <button class="btn-chart compare-toggle active" data-type="pie">Pie</button>
+                    <button class="btn-chart compare-toggle" data-type="bar">Bar</button>
+                    <button class="btn-chart compare-toggle" data-type="treemap">Treemap</button>
+                </div>
+            </div>
+            <div id="compare-result-chart-area"></div>
+            <div id="compare-result-delta"></div>
+        </section>
+
+        <div id="snapshot-list"></div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
+    <script src="history.js"></script>
+</body>
+</html>

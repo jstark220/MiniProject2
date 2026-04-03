@@ -11,6 +11,11 @@
     <header>
         <h1>Net Worth Tracker</h1>
         <p>Get a clear snapshot of your wealth across all asset classes.</p>
+        <nav class="top-nav">
+            <a href="index.html" class="nav-link active">Portfolio</a>
+            <a href="history.html" class="nav-link">Saved Snapshots</a>
+            <a href="advice.html" class="nav-link">Recommendations</a>
+        </nav>
     </header>
 
     <main>
@@ -24,6 +29,13 @@
                         <select id="asset-type">
                             <!-- Populated by script.js -->
                         </select>
+                        <input
+                            type="text"
+                            id="other-type"
+                            class="hidden"
+                            placeholder="Describe your asset…"
+                            autocomplete="off"
+                        >
                     </div>
                     <div class="form-group">
                         <label for="asset-name">Name / Label</label>
@@ -50,7 +62,10 @@
         </section>
 
         <section class="card" id="summary-section">
-            <h2>Your Portfolio</h2>
+            <div class="section-header">
+                <h2>Your Portfolio</h2>
+                <button id="clear-all" class="btn-clear hidden">Clear All</button>
+            </div>
 
             <div id="empty-state">
                 <p>No assets added yet. Use the form above to get started.</p>
@@ -62,6 +77,7 @@
                         <th>Asset Type</th>
                         <th>Label</th>
                         <th>Value</th>
+                        <th>% of Portfolio</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -75,8 +91,34 @@
             </table>
         </section>
 
+        <section class="card hidden" id="save-section">
+            <div class="section-header">
+                <h2>Save Snapshot</h2>
+            </div>
+            <div class="save-row">
+                <input type="text" id="snapshot-label" placeholder="e.g. Q1 2026, After bonus…" autocomplete="off">
+                <button id="save-btn" class="btn-primary">Save Snapshot</button>
+            </div>
+        </section>
+
+        <section class="card hidden" id="viz-section">
+            <div class="section-header">
+                <h2>Visualization</h2>
+                <div class="chart-toggles">
+                    <button class="btn-chart active" data-chart="pie">Pie</button>
+                    <button class="btn-chart" data-chart="bar">Bar</button>
+<button class="btn-chart" data-chart="treemap">Treemap</button>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-canvas"></canvas>
+            </div>
+        </section>
+
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
