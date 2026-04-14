@@ -60,6 +60,7 @@ const clearAllBtn    = document.getElementById('clear-all');
 const saveSection    = document.getElementById('save-section');
 const snapshotLabel  = document.getElementById('snapshot-label');
 const saveBtn        = document.getElementById('save-btn');
+const nameGroup     = document.getElementById('name-group');
 const vizSection    = document.getElementById('viz-section');
 const chartCanvas   = document.getElementById('chart-canvas');
 const chartBtns     = document.querySelectorAll('.btn-chart');
@@ -120,6 +121,13 @@ selectEl.addEventListener('change', function () {
     } else {
         otherInput.classList.add('hidden');
         otherInput.value = '';
+    }
+
+    if (selectEl.value === 'Cash') {
+        nameGroup.classList.add('hidden');
+        nameInput.value = '';
+    } else {
+        nameGroup.classList.remove('hidden');
     }
 });
 
@@ -199,8 +207,8 @@ function renderChart() {
     const total        = values.reduce((s, v) => s + v, 0);
     const ctx          = chartCanvas.getContext('2d');
 
-    Chart.defaults.color       = '#8abfa0';
-    Chart.defaults.borderColor = '#1f4d30';
+    Chart.defaults.color       = '#5a7a65';
+    Chart.defaults.borderColor = '#cdddd4';
 
     if (currentChartType === 'pie') {
         chartInstance = new Chart(ctx, {
@@ -210,7 +218,7 @@ function renderChart() {
                 datasets: [{
                     data: values,
                     backgroundColor: bgColors,
-                    borderColor: '#112418',
+                    borderColor: '#ffffff',
                     borderWidth: 2,
                 }]
             },
@@ -220,7 +228,7 @@ function renderChart() {
                 plugins: {
                     legend: {
                         position: 'right',
-                        labels: { color: '#f0faf4', padding: 16, font: { size: 13 } }
+                        labels: { color: '#0f1a13', padding: 16, font: { size: 13 } }
                     },
                     tooltip: {
                         callbacks: {
@@ -265,9 +273,9 @@ function renderChart() {
                 },
                 scales: {
                     x: {
-                        grid: { color: '#1f4d30' },
+                        grid: { color: '#cdddd4' },
                         ticks: {
-                            color: '#8abfa0',
+                            color: '#5a7a65',
                             callback: v => v >= 1000000 ? '$' + (v / 1000000).toFixed(1) + 'M'
                                         : v >= 1000    ? '$' + (v / 1000).toFixed(0) + 'K'
                                         : '$' + v
@@ -275,7 +283,7 @@ function renderChart() {
                     },
                     y: {
                         grid: { display: false },
-                        ticks: { color: '#f0faf4', font: { size: 13 } }
+                        ticks: { color: '#0f1a13', font: { size: 13 } }
                     }
                 }
             }
@@ -303,7 +311,7 @@ function renderChart() {
                         display: true,
                         align: 'center',
                         position: 'middle',
-                        color: '#f0faf4',
+                        color: '#0f1a13',
                         font: { size: 13, weight: 'bold' },
                         formatter(ctx) {
                             if (!ctx.raw) return '';

@@ -51,6 +51,7 @@ const snapshots = JSON.parse(localStorage.getItem('nwt_snapshots') || '[]');
 
 const listEl        = document.getElementById('snapshot-list');
 const emptyEl       = document.getElementById('history-empty');
+const deleteAllBtn  = document.getElementById('delete-all-btn');
 const pickerCard    = document.getElementById('compare-picker-card');
 const resultCard    = document.getElementById('compare-result-card');
 const resultTitle   = document.getElementById('compare-result-title');
@@ -61,13 +62,24 @@ const selectA       = document.getElementById('compare-a');
 const selectB       = document.getElementById('compare-b');
 const goBtn         = document.getElementById('compare-go-btn');
 
-Chart.defaults.color       = '#8abfa0';
-Chart.defaults.borderColor = '#1f4d30';
+Chart.defaults.color       = '#5a7a65';
+Chart.defaults.borderColor = '#cdddd4';
+
+deleteAllBtn.addEventListener('click', function () {
+    if (!confirm('Delete all snapshots? This cannot be undone.')) return;
+    localStorage.removeItem('nwt_snapshots');
+    listEl.innerHTML = '';
+    emptyEl.classList.remove('hidden');
+    pickerCard.classList.add('hidden');
+    resultCard.classList.add('hidden');
+    deleteAllBtn.classList.add('hidden');
+});
 
 if (snapshots.length === 0) {
     emptyEl.classList.remove('hidden');
 } else {
     emptyEl.classList.add('hidden');
+    deleteAllBtn.classList.remove('hidden');
     populatePicker();
 
     [...snapshots].reverse().forEach(snapshot => {
@@ -290,7 +302,7 @@ function makePie(canvasId, grouped, total) {
             datasets: [{
                 data:            grouped.map(g => g.amount),
                 backgroundColor: grouped.map(g => getColor(g.category, 'bg')),
-                borderColor:     '#112418',
+                borderColor:     '#ffffff',
                 borderWidth:     2,
             }]
         },
@@ -298,7 +310,7 @@ function makePie(canvasId, grouped, total) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { position: 'bottom', labels: { color: '#f0faf4', padding: 10, font: { size: 11 } } },
+                legend: { position: 'bottom', labels: { color: '#0f1a13', padding: 10, font: { size: 11 } } },
                 tooltip: {
                     callbacks: {
                         label(ctx) {
@@ -337,7 +349,7 @@ function makeTreemap(canvasId, grouped, total) {
                     display: true,
                     align: 'center',
                     position: 'middle',
-                    color: '#f0faf4',
+                    color: '#0f1a13',
                     font: { size: 11, weight: 'bold' },
                     formatter(ctx) {
                         if (!ctx.raw) return '';
@@ -400,16 +412,16 @@ function makeCompareBar(canvasId, categories, pctsA, pctsB, labelA, labelB) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { labels: { color: '#f0faf4', font: { size: 13 } } },
+                legend: { labels: { color: '#0f1a13', font: { size: 13 } } },
                 tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` } }
             },
             scales: {
-                x: { grid: { display: false }, ticks: { color: '#f0faf4', font: { size: 12 } } },
+                x: { grid: { display: false }, ticks: { color: '#0f1a13', font: { size: 12 } } },
                 y: {
                     beginAtZero: true,
                     max: 100,
-                    grid: { color: '#1f4d30' },
-                    ticks: { color: '#8abfa0', callback: v => v + '%' }
+                    grid: { color: '#cdddd4' },
+                    ticks: { color: '#5a7a65', callback: v => v + '%' }
                 }
             }
         }
